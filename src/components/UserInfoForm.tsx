@@ -16,7 +16,7 @@ export default function UserInfoForm({ onSubmit }: Props) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (name && role && company) {
-      onSubmit({ name, role, company, email: '' });
+      onSubmit({ name, role, company });
     }
   };
 

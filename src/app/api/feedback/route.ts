@@ -141,8 +141,8 @@ function parseFeedback(text: string): Feedback {
  */
 function generatePlaceholderFeedback(userInfo: UserInfo): Feedback {
   return {
-    keyObservation: 'Your responses point to gaps in how decisions get made and how work flows between functions. You know where things should happen, but the actual triggers and handoffs seem less defined than they could be.',
-    firstThingToChange: 'Map out one end-to-end process—pick the one that causes the most friction. Document every handoff, every decision point, and who actually makes the call. You'll find the gaps quickly.',
-    watchOuts: 'Watch your planning assumptions. If demand behavior is shifting and you're not adjusting structures to match, you're building on sand. Also, check if your team is stretched too thin—reactive mode kills strategic progress.',
+    keyObservation: "Your responses point to gaps in how decisions get made and how work flows between functions. You know where things should happen, but the actual triggers and handoffs seem less defined than they could be.",
+    firstThingToChange: "Map out one end-to-end process - pick the one that causes the most friction. Document every handoff, every decision point, and who actually makes the call. You'll find the gaps quickly.",
+    watchOuts: "Watch your planning assumptions. If demand behavior is shifting and you're not adjusting structures to match, you're building on sand. Also, check if your team is stretched too thin - reactive mode kills strategic progress.",
   };
 }
