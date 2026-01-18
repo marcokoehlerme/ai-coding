@@ -7,6 +7,11 @@ export default function Home() {
       <div className="absolute top-8 left-8">
         <Image src="/logo.png" alt="PSCM House" width={180} height={60} priority />
       </div>
+      <div className="absolute top-8 right-8">
+        <Link href="/admin" className="text-sm text-primary/60 hover:text-primary underline">
+          Dashboard
+        </Link>
+      </div>
       <div className="max-w-2xl w-full text-center">
         <h1 className="text-5xl font-bold text-primary mb-6">
           Supply Chain Diagnostic Tool

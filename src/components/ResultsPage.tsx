@@ -28,6 +28,11 @@ export default function ResultsPage({ userInfo, categoryScores, feedback }: Prop
       <div className="absolute top-8 left-8">
         <Image src="/logo.png" alt="PSCM House" width={180} height={60} priority />
       </div>
+      <div className="absolute top-8 right-8">
+        <a href="/admin" className="text-sm text-primary/60 hover:text-primary underline">
+          Dashboard
+        </a>
+      </div>
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
