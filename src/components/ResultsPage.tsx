@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { UserInfo, CategoryScores, Feedback } from '@/lib/types';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 
@@ -24,6 +25,9 @@ export default function ResultsPage({ userInfo, categoryScores, feedback }: Prop
 
   return (
     <div className="min-h-screen py-12 px-4">
+      <div className="absolute top-8 left-8">
+        <Image src="/logo.png" alt="PSCM House" width={180} height={60} priority />
+      </div>
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -80,11 +84,6 @@ export default function ResultsPage({ userInfo, categoryScores, feedback }: Prop
 
         {/* AI Feedback */}
         <div className="bg-white rounded-xl p-8 shadow-lg mb-8">
-          <div className="mb-6">
-            <h3 className="text-xl font-bold text-primary mb-3">Summary</h3>
-            <p className="text-primary/80 leading-relaxed">{feedback.summary}</p>
-          </div>
-
           <div className="mb-6">
             <h3 className="text-xl font-bold text-primary mb-3">Key Observation</h3>
             <p className="text-primary/80 leading-relaxed">{feedback.keyObservation}</p>

@@ -71,29 +71,52 @@ function buildAnalysisContext(
   answers: Answer[],
   categoryScores: CategoryScores
 ): string {
-  let context = `You are a Senior Supply Chain Consultant analyzing diagnostic results for ${userInfo.name}, who works as ${userInfo.role} at ${userInfo.company}.\n\n`;
+  let context = `You are a senior Procurement and Supply Chain advisor.\n\n`;
 
-  context += `CATEGORY SCORES (out of 5):\n`;
+  context += `Context:\n`;
+  context += `This is a short diagnostic report based on a self-assessment.\n`;
+  context += `The input below contains statement-level results across multiple dimensions.\n\n`;
+
+  context += `Observed results (evidence):\n`;
   Object.entries(categoryScores).forEach(([category, data]) => {
-    context += `- ${category}: ${data.score.toFixed(1)}\n`;
+    context += `\nDimension: ${category}\n`;
+    // Find all answers for this dimension
+    const dimensionStatements = statements.filter(s => s.dimension === category);
+    dimensionStatements.forEach((statement) => {
+      const answer = answers.find(a => a.statementId === statement.id);
+      if (answer) {
+        context += `- Statement: ${statement.question}\n`;
+        context += `  Response: ${answer.value}/5\n`;
+        context += `  Interpretation: ${statement.interpretation}\n`;
+      }
+    });
   });
 
-  context += `\nDETAILED RESPONSES:\n`;
-  answers.forEach((answer) => {
-    const statement = statements.find((s) => s.id === answer.statementId);
-    if (statement) {
-      context += `\nQ: ${statement.question}\n`;
-      context += `A: ${answer.value}/5\n`;
-      context += `Context: ${statement.interpretation}\n`;
-    }
-  });
+  context += `\n\nTask:\n`;
+  context += `Write holistic feedback for ${userInfo.name} (${userInfo.role} at ${userInfo.company}).\n\n`;
 
-  context += `\n\nBased on this analysis, provide feedback in the following format:\n\n`;
-  context += `SUMMARY: (2-3 sentences summarizing what you observe about their supply chain maturity, mentioning specific areas where they are strong or weak)\n\n`;
-  context += `KEY OBSERVATION: (One paragraph identifying the most critical pattern or insight from their responses)\n\n`;
-  context += `FIRST THING TO CHANGE: (One specific, actionable recommendation for immediate improvement)\n\n`;
-  context += `WATCH-OUTS: (2-3 specific risks or challenges they should monitor based on their current state)\n\n`;
-  context += `Keep the tone professional but conversational. Reference specific responses they gave, not just scores.`;
+  context += `Output format:\n\n`;
+  context += `KEY OBSERVATION\n`;
+  context += `- 1-2 sentences. Clean, crisp, clear.\n`;
+  context += `- Focus on what you observe, leave room for questions.\n\n`;
+
+  context += `FIRST THING TO CHANGE\n`;
+  context += `- 1-2 sentences. One specific, concrete action.\n`;
+  context += `- Operational and actionable.\n\n`;
+
+  context += `WATCH-OUTS\n`;
+  context += `- 2-3 sentences. Specific risks or challenges to monitor.\n`;
+  context += `- Based on their current state.\n\n`;
+
+  context += `Rules:\n`;
+  context += `- Do NOT mention scores, numbers, or quote statements\n`;
+  context += `- Do NOT explain methodology or mention dimension names\n`;
+  context += `- Keep it concrete and operational\n`;
+  context += `- Avoid buzzwords and frameworks\n`;
+  context += `- Write directly to ${userInfo.name} using 'You' language\n\n`;
+
+  context += `Tone:\n`;
+  context += `Direct, calm, senior advisor. No fluff.`;
 
   return context;
 }
@@ -102,16 +125,14 @@ function buildAnalysisContext(
  * Parse Claude's response into structured feedback
  */
 function parseFeedback(text: string): Feedback {
-  const summaryMatch = text.match(/SUMMARY:?\s*([^\n]+(?:\n(?!KEY OBSERVATION|FIRST THING|WATCH)[^\n]+)*)/i);
   const observationMatch = text.match(/KEY OBSERVATION:?\s*([^\n]+(?:\n(?!FIRST THING|WATCH)[^\n]+)*)/i);
   const changeMatch = text.match(/FIRST THING TO CHANGE:?\s*([^\n]+(?:\n(?!WATCH)[^\n]+)*)/i);
   const watchOutsMatch = text.match(/WATCH-?OUTS?:?\s*([^\n]+(?:\n(?!$)[^\n]+)*)/i);
 
   return {
-    summary: summaryMatch?.[1]?.trim() || 'Analysis completed.',
-    keyObservation: observationMatch?.[1]?.trim() || 'Multiple areas identified for improvement.',
-    firstThingToChange: changeMatch?.[1]?.trim() || 'Focus on process clarity and ownership.',
-    watchOuts: watchOutsMatch?.[1]?.trim() || 'Monitor capacity and decision-making speed.',
+    keyObservation: observationMatch?.[1]?.trim() || 'Your responses reveal important insights about operational clarity and decision-making patterns that warrant deeper exploration.',
+    firstThingToChange: changeMatch?.[1]?.trim() || 'Establish clear decision-making authority for each key process, documenting who owns each critical decision point.',
+    watchOuts: watchOutsMatch?.[1]?.trim() || 'Monitor how well your current processes handle volume increases. Ensure your team has bandwidth for strategic work, not just firefighting.',
   };
 }
 
@@ -120,9 +141,8 @@ function parseFeedback(text: string): Feedback {
  */
 function generatePlaceholderFeedback(userInfo: UserInfo): Feedback {
   return {
-    summary: `Thank you for completing the diagnostic, ${userInfo.name}. Your responses reveal important insights about your supply chain operations and areas where strategic improvements could drive significant impact.`,
-    keyObservation: 'Based on your responses, there appears to be a need for stronger end-to-end visibility and clearer process ownership across your supply chain operations. This is a common challenge for growing organizations.',
-    firstThingToChange: 'Establish clear decision-making authority for each key process. Start by documenting who owns each critical decision point in your supply chain flow.',
-    watchOuts: 'Watch for capacity constraints as you scale. Monitor how well your current processes handle volume increases, and ensure your team has bandwidth for strategic work, not just firefighting.',
+    keyObservation: 'Your responses point to gaps in how decisions get made and how work flows between functions. You know where things should happen, but the actual triggers and handoffs seem less defined than they could be.',
+    firstThingToChange: 'Map out one end-to-end process—pick the one that causes the most friction. Document every handoff, every decision point, and who actually makes the call. You'll find the gaps quickly.',
+    watchOuts: 'Watch your planning assumptions. If demand behavior is shifting and you're not adjusting structures to match, you're building on sand. Also, check if your team is stretched too thin—reactive mode kills strategic progress.',
   };
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Answer } from '@/lib/types';
 import { statements } from '@/lib/statements';
 
@@ -91,6 +92,9 @@ export default function QuestionFlow({ userName, onComplete }: Props) {
 
   return (
     <div className="min-h-screen flex flex-col px-4 py-8">
+      <div className="absolute top-8 left-8">
+        <Image src="/logo.png" alt="PSCM House" width={180} height={60} priority />
+      </div>
       {/* Progress Bar */}
       <div className="max-w-2xl w-full mx-auto mb-8">
         <div className="flex justify-between text-sm text-primary/60 mb-2">

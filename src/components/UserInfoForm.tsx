@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { UserInfo } from '@/lib/types';
 
 interface Props {
@@ -23,6 +24,9 @@ export default function UserInfoForm({ onSubmit }: Props) {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12">
+      <div className="absolute top-8 left-8">
+        <Image src="/logo.png" alt="PSCM House" width={180} height={60} priority />
+      </div>
       <div className="max-w-xl w-full">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-primary mb-4">

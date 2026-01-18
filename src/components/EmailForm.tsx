@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface Props {
   onSubmit: (email: string) => void;
@@ -25,6 +26,9 @@ export default function EmailForm({ onSubmit, isLoading }: Props) {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="absolute top-8 left-8">
+        <Image src="/logo.png" alt="PSCM House" width={180} height={60} priority />
+      </div>
       <div className="max-w-xl w-full">
         <div className="text-center mb-12">
           <div className="mb-6">

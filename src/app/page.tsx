@@ -1,8 +1,12 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-light flex items-center justify-center px-4">
+      <div className="absolute top-8 left-8">
+        <Image src="/logo.png" alt="PSCM House" width={180} height={60} priority />
+      </div>
       <div className="max-w-2xl w-full text-center">
         <h1 className="text-5xl font-bold text-primary mb-6">
           Supply Chain Diagnostic Tool

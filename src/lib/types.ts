@@ -50,7 +50,6 @@ export interface DiagnosticSubmission {
 
 // AI-generated feedback
 export interface Feedback {
-  summary: string; // 2-sentence overview
   keyObservation: string;
   firstThingToChange: string;
   watchOuts: string;
