@@ -1,21 +1,46 @@
-# Project Context
+# Supply Chain Diagnostic Tool - Project Context
 
-## Tech Stack Overview
+## Overview
 
-This project is built with the latest Next.js framework and modern web technologies:
+A professional typeform-style diagnostic tool for supply chain assessment that provides AI-powered personalized feedback. Users answer 15 questions across 5 dimensions and receive actionable insights from a Senior Supply Chain Consultant.
+
+## Tech Stack
 
 - **Next.js 16.1.3** - React framework with App Router
 - **React 19** - UI library
 - **TypeScript 5.x** - Type-safe JavaScript with strict mode enabled
-- **Tailwind CSS 4.x** - Utility-first CSS framework with PostCSS
-- **ESLint** - Code linting with Next.js recommended configuration
+- **Tailwind CSS 4.x** - Utility-first CSS framework
+- **Recharts** - Spider/radar chart visualization
+- **Anthropic Claude API** - AI-powered feedback generation
+- **File-based JSON storage** - No database required
 
-### Key Configuration Choices
+## Key Features
 
-- **App Router**: Uses the modern Next.js App Router (not Pages Router) for improved performance and developer experience
-- **TypeScript Strict Mode**: Enabled for maximum type safety and error prevention
-- **Import Aliases**: Configured with `@/*` pointing to `./src/*` for cleaner imports
-- **Source Directory**: All application code is organized under `/src` for better project structure
+### User Journey
+1. **Landing Page** - Clean welcome with CTA button
+2. **User Info Collection** - Name, role, company
+3. **15-Question Flow** - Typeform-style, one question at a time with progress bar
+4. **Email Collection** - Mandatory for viewing results
+5. **Results Page** - Spider chart + AI feedback + booking CTA
+6. **Admin Dashboard** - View all submissions and analytics
+
+### Question Types
+- **Scale (1-5)**: Visual button selection
+- **Yes/No**: Yes = 5 points, No = 1 point
+- **Dropdown**: Multiple options with custom scoring
+
+### AI Feedback
+- Powered by Anthropic Claude API
+- Three sections: Key Observation, First Thing To Change, Watch-Outs
+- Direct, senior advisor tone
+- No scores or numbers mentioned
+- Uses "You" language to engage client
+
+### Branding
+- **Colors**: #1b5443 (primary dark green), #f5f6f4 (light background)
+- **Font**: Inter (Google Fonts)
+- **Logo**: PSCM House dark version in top-left corner
+- **Buttons**: Dark with rounded edges, light text
 
 ## Folder Structure
 
@@ -147,9 +172,81 @@ import { MyComponent } from '@/components/MyComponent'
 import { helper } from '@/lib/utils'
 ```
 
+## Data Storage & Admin Access
+
+### How Data is Saved
+- **Location**: `data/submissions.json`
+- **Format**: JSON file (no database required)
+- **Persistence**: Survives server restarts during development
+- **Structure**: Each submission contains user info, answers, scores, and timestamp
+
+### Accessing the Dashboard
+- **Development**: Click "Dashboard" link in top-right corner OR visit http://localhost:3000/admin
+- **No authentication** (add for production!)
+- **Features**: View all submissions, average scores, export data
+
+See [DATA_STORAGE.md](DATA_STORAGE.md) for detailed information about:
+- What data is saved
+- How to export submissions
+- Backup strategies
+- Migration to database for production
+
+## 5 Diagnostic Dimensions
+
+1. **External Risk & Demand Stability** (3 questions)
+   - Demand predictability
+   - Risk adjustment
+   - Surprise frequency
+
+2. **Decision Ownership & Speed** (3 questions)
+   - Decision clarity
+   - Authority boundaries
+   - Decision speed
+
+3. **End-to-End Process Flow** (3 questions)
+   - Order flow understanding
+   - Cross-functional impact
+   - Lead time consideration
+
+4. **Process Clarity & Ownership** (3 questions)
+   - Trigger clarity
+   - Input/output ownership
+   - Handoff quality
+
+5. **Strategic Focus & Capacity** (3 questions)
+   - Growth alignment
+   - Priority clarity
+   - Operational load
+
+## Important Files
+
+- **[README.md](README.md)** - Complete setup and deployment guide
+- **[SETUP.md](SETUP.md)** - Quick start guide
+- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Technical details
+- **[DATA_STORAGE.md](DATA_STORAGE.md)** - How data is saved and accessed
+- **[statements.csv](statements.csv)** - Original question data source
+
+## Current Status
+
+✅ **Fully Functional**
+- All 15 questions implemented
+- AI feedback working (with Anthropic API key)
+- Spider chart visualization
+- Admin dashboard accessible
+- Mobile responsive
+
+⚠️ **For Production Deployment**
+- Add authentication to `/admin` route
+- Configure Anthropic API key in environment variables
+- Update booking link in ResultsPage.tsx
+- Consider database migration for data persistence
+- Enable HTTPS
+
 ## Resources
 
 - [Next.js Documentation](https://nextjs.org/docs)
 - [React Documentation](https://react.dev)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [TypeScript Documentation](https://www.typescriptlang.org/docs)
+- [Anthropic API Documentation](https://docs.anthropic.com/)
+- [Recharts Documentation](https://recharts.org/)
