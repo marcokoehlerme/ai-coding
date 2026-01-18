@@ -1,0 +1,37 @@
+DT1,Dimension,Statement,Answer Type,Dropdown Options (with values),Scoring Interpretation
+1,External Risk & Demand Stability,Our external demand behavior is best described as:,Dropdown,"Highly predictable
+Mostly predictable
+Mixed
+Mostly unpredictable
+Completely unpredictable",Lower = volatility unmanaged; Higher = volatility understood
+2,Decision Ownership & Speed,We clearly know who makes the final decision.,Yes / No,,Low = confusion; High = clarity
+3,End-to-End Process Flow,We all have a shared understanding of how an order moves from start to finish.,1–5,,Low = silo view; High = system understanding
+4,Process Clarity & Ownership,We clearly know what triggers each key process.,1–5,,Low = unclear triggers; High = clear initiation
+5,Strategic Focus & Capacity,Our current procurement and supply chain setup can realistically support our growth plans.,1–5,,Low = overextension; High = feasible ambition
+6,External Risk & Demand Stability,"When external risks increase, 
+we actually adjust our plans instead of just talking about them.",Yes / No,,No = talk only; Yes = structural impact
+7,Decision Ownership & Speed,Responsibility for decision-making is clear for each key process.,Yes / No,,No = unclear authority
+8,End-to-End Process Flow,Changes in one area rarely create problems elsewhere.,1–5,,Low = system friction
+9,Process Clarity & Ownership,"For each key process, we clearly know who provides the input and who receives the output.",1–5,,No = unclear ownership; Yes = clear boundaries
+10,Strategic Focus & Capacity,We are clear about our priorities and consciously say no to non-essential work.,1–5,,No = everything is priority; Yes = focus
+11,External Risk & Demand Stability,We are rarely surprised by sudden changes in customer demand.,Dropdown,"Very rarely surprised
+Rarely surprised
+Sometimes surprised
+Often surprised
+Very often surprised",Low = constant surprises; High = demand behavior understood
+12,Decision Ownership & Speed,Our decision speed in critical situations is best described as:,Dropdown,"Very fast
+Fast enough
+Acceptable
+Slow
+Very slow",Lower = execution bottleneck
+13,End-to-End Process Flow,Lead times are consistently considered in planning decisions.,1–5,,Low = surprises
+14,Process Clarity & Ownership,The quality of handoffs between our processes is:,Dropdown,"Very clear and reliable
+Mostly clear, minor issues
+Inconsistent
+Often unclear
+Very unclear and error-prone",Lower = flow disruption
+15,Strategic Focus & Capacity,Our current operational load is best described as:,Dropdown,"Well balanced
+Manageable with some pressure
+Often stretched
+Constantly overloaded
+Overwhelming",Lower = unsustainable execution
